@@ -1,6 +1,6 @@
 //Qirui Sun
 //Aidan Jennings
-//Reese Kuper
+//Resse who didnt come to lab
 //*****************************************************************************
 #include "lab_buttons.h"
 #include "Invader.black.h"
@@ -151,9 +151,12 @@ const uint8_t *null_s = null_sprite; //a null sprite that contains nothing but a
 					*Program that checks to make sure nobody has won the game
 					*AI so that can play with only themselves
 					
+
 					
 					*Somebody should set up the wireless connections and make it so that player 1 and player two are automatically assigned a unique id based on their player # 
 					*Make a github?
+
+
 */
 
 static char game_title[] = "Tic-Tac-Toe\n";
@@ -162,9 +165,9 @@ static char two_player_game[] = "2 Player (Wireless)";
 static char cursor[] = "-->";
 char input[1] = "0"; //Input for the D-Pad, Numbers go clockwise 1-4
 
-int game_board[3][3] = {{0,1,2},
-												{1,1,0},
-											  {0,2,2}};
+int game_board[3][3] = {{0,0,0},
+												{0,0,0},
+											  {0,0,0}};
 
 uint8_t game_state = 0;
 												
@@ -184,6 +187,7 @@ int game_mode = 0;
 				2 = Multi-Player
 		*/
 
+//Functions used throughout the game
 int init(){
 	ece210_initialize_board();
 }
@@ -247,7 +251,7 @@ void draw_game_screen(){
 					
 				}
 				
-				ece210_lcd_draw_image((x*80)+10,32,(y*80)+10,32, p_image, LCD_COLOR_CYAN, LCD_COLOR_BLACK); //Draw the sprite at whichever index with the assigned sprite
+				ece210_lcd_draw_image((x*80)+(74/3),32,(y*80)+(74/3),32, p_image, LCD_COLOR_CYAN, LCD_COLOR_BLACK); //Draw the sprite at whichever index with the assigned sprite
 			}
 			
 		}
@@ -257,15 +261,14 @@ void draw_game_screen(){
 		
 	
 	
-	//Also draw in sprites for each value of the array 
-	
-
-
 void clear_screen(){
 	ece210_lcd_draw_rectangle(0, LCD_MAX_DRAW_X, 0, LCD_MAX_DRAW_Y, LCD_COLOR_BLACK);
 }
 
 
+
+
+//NOTHING OTHER THAN MAIN BELOW THIS LINE
 int main(){
 
 	init();
@@ -273,7 +276,7 @@ int main(){
 	int color = LCD_COLOR_RED;
 	
 	//Title Screen Code 
-	while(!game_mode){ //Loop until a game is choosen
+	while(!game_mode){ //Loop the title screen until a game is choosen
 	
 		ece210_lcd_print_string(game_title,160,50,LCD_COLOR_WHITE,LCD_COLOR_BLACK);																	//Draw Menu Items
 		ece210_lcd_print_string(one_player_game, MENU_ITEM_1_X, MENU_ITEM_1_Y, LCD_COLOR_RED,LCD_COLOR_BLACK);
@@ -299,7 +302,6 @@ int main(){
 			game_mode = ((cursor_pos - 75)%2)+1; //Set game mode to 1 or 2 based on cursor_pos value, I know it's ugly but it works shut up
 			
 		}
-	 
 		
 	}
 	
@@ -327,4 +329,6 @@ return 0;
 	
 }
 
-
+//ece210_lcd_draw_rectangle(160,15, 200, 15, LCD_COLOR_BLACK);
+//get_player_input();
+//ece210_lcd_print_string(input,160,200,LCD_COLOR_WHITE,LCD_COLOR_BLACK);
