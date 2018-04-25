@@ -250,7 +250,7 @@ void draw_game_screen(){
 					
 				}
 				
-				ece210_lcd_draw_image((x*80)+10,32,(y*80)+10,32, p_image, LCD_COLOR_CYAN, LCD_COLOR_BLACK); //Draw the sprite at whichever index with the assigned sprite
+				ece210_lcd_draw_image((x*80)+(74/3),32,(y*80)+(74/3),32, p_image, LCD_COLOR_CYAN, LCD_COLOR_BLACK); //Draw the sprite at whichever index with the assigned sprite
 			}
 			
 		}
