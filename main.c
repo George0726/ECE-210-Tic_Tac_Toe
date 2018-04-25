@@ -1,6 +1,6 @@
 //Qirui Sun
 //Aidan Jennings
-//Resse who didnt come to lab
+//Reese Kuper
 //*****************************************************************************
 #include "lab_buttons.h"
 #include "Invader.black.h"
@@ -151,12 +151,9 @@ const uint8_t *null_s = null_sprite; //a null sprite that contains nothing but a
 					*Program that checks to make sure nobody has won the game
 					*AI so that can play with only themselves
 					
-
 					
 					*Somebody should set up the wireless connections and make it so that player 1 and player two are automatically assigned a unique id based on their player # 
 					*Make a github?
-
-
 */
 
 static char game_title[] = "Tic-Tac-Toe\n";
@@ -250,7 +247,7 @@ void draw_game_screen(){
 					
 				}
 				
-				ece210_lcd_draw_image((x*80)+(74/3),32,(y*80)+(74/3),32, p_image, LCD_COLOR_CYAN, LCD_COLOR_BLACK); //Draw the sprite at whichever index with the assigned sprite
+				ece210_lcd_draw_image((x*80)+10,32,(y*80)+10,32, p_image, LCD_COLOR_CYAN, LCD_COLOR_BLACK); //Draw the sprite at whichever index with the assigned sprite
 			}
 			
 		}
@@ -273,6 +270,7 @@ int main(){
 
 	init();
 	uint8_t cursor_pos = MENU_ITEM_1_Y;
+	int color = LCD_COLOR_RED;
 	
 	//Title Screen Code 
 	while(!game_mode){ //Loop until a game is choosen
@@ -282,7 +280,7 @@ int main(){
 		ece210_lcd_print_string(two_player_game, MENU_ITEM_2_X, MENU_ITEM_2_Y, LCD_COLOR_BLUE,LCD_COLOR_BLACK); 
 		
 		ece210_lcd_draw_rectangle(0, LCD_SIZE_X - MENU_ITEM_1_X, MENU_ITEM_1_Y, 40, LCD_COLOR_BLACK);								//Draw Cursor
-		ece210_lcd_print_string(cursor, MENU_ITEM_1_X+38, cursor_pos,LCD_COLOR_BLUE,LCD_COLOR_BLACK);
+		ece210_lcd_print_string(cursor, MENU_ITEM_1_X+38, cursor_pos,color,LCD_COLOR_BLACK);
 		
 		ece210_lcd_draw_image(200,X_WIDTH_PXL, 130, X_HEIGHT_PXL, X , LCD_COLOR_WHITE, LCD_COLOR_BLACK);						//Draw sprites
 		ece210_lcd_draw_image(200,X_WIDTH_PXL, 165, X_HEIGHT_PXL, O , LCD_COLOR_WHITE, LCD_COLOR_BLACK);
@@ -290,8 +288,12 @@ int main(){
 		get_player_input();																																													//Let player choose game mode
 		
 		if(input[0] == '1'){
+			color = LCD_COLOR_RED;
+			ece210_lcd_print_string(cursor, MENU_ITEM_1_X+38, cursor_pos,color,LCD_COLOR_BLACK);
 			cursor_pos = MENU_ITEM_1_Y;
 		}else if(input[0] == '3'){
+			color = LCD_COLOR_BLUE;
+			ece210_lcd_print_string(cursor, MENU_ITEM_1_X+38, cursor_pos,color,LCD_COLOR_BLACK);
 			cursor_pos = MENU_ITEM_2_Y;
 		}else if(input[0] == '2'){ 																																									//Player selects with the right button on the d-pad
 			game_mode = ((cursor_pos - 75)%2)+1; //Set game mode to 1 or 2 based on cursor_pos value, I know it's ugly but it works shut up
@@ -325,6 +327,4 @@ return 0;
 	
 }
 
-//ece210_lcd_draw_rectangle(160,15, 200, 15, LCD_COLOR_BLACK);
-//get_player_input();
-//ece210_lcd_print_string(input,160,200,LCD_COLOR_WHITE,LCD_COLOR_BLACK);
+
